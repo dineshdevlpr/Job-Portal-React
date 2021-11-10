@@ -15,12 +15,14 @@ function DemoCredentials() {
                                         <ul>   
                                             <li>Email ID : candidate@mail.com</li>
                                             <li>Password : 123</li>
+                                            <li><Link to="/candidate/login" className="text-success">Login as Candidate</Link></li> 
                                         </ul>
                                     </div>
                                     <div className="card text-dark"><u><strong><h3 style={{textAlign: "center"}}>For Recruiter</h3></strong></u>
                                         <ul>   
                                             <li>Email ID : recruiter@mail.com</li>
                                             <li>Password : 123</li>
+                                            <li><Link to="/recruiter/login" className="text-success">Login as Recruiter</Link></li> 
                                         </ul>
                                     </div>
                                 </div>
