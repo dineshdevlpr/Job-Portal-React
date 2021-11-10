@@ -1,16 +1,19 @@
 import React, { useState } from 'react'
 import { Link, useHistory } from "react-router-dom";
+import loader from '../../../loader.svg'
 
 
-export default function LoginrRecruiter() {
+export default function LoginRecruiter() {
 
     const [email, setEmail] = useState("");
+    let [loading, setLoading] = useState(false)
     const [password, setPassword] = useState("");
     const history = useHistory();
 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true)
         await fetch("https://jobportaltask.herokuapp.com/recruiter/login", {
         method: "POST",
         mode: 'cors',
@@ -37,19 +40,22 @@ export default function LoginrRecruiter() {
 
 
     return (
-        <>
+        <>{ loading
+            ?
+            <div className="text-center"><img src={loader} alt='redirecting'/><h5>Logging In...</h5></div>
+            :
             <div className="container">
                 <div className="row justify-content-center align-items-center">
                     <div className="col-md-6">
                         <div className="col-md-12">
                             <form className="form" action="" method="post" onSubmit={handleSubmit}>
-                                <h3 className="text-center text-info">Login as Recruiter</h3>
+                                <h3 className="text-center text-primary">Login as Recruiter</h3>
                                 <div className="form-group">
-                                    <label for="email" className="text-info">Email:</label><br/>
+                                    <label for="email" className="text-primary">Email:</label><br/>
                                     <input type="email" id="email" name="email" required onChange={(e) => setEmail(e.target.value)} className="form-control" />
                                 </div>
                                 <div className="form-group">
-                                    <label for="password" className="text-info">Password:</label><br/>
+                                    <label for="password" className="text-primary">Password:</label><br/>
                                     <input type="password" name="password" id="password" required onChange={(e) => setPassword(e.target.value)} className="form-control" />
                                 </div>
                                 <div className="form-group">
@@ -64,6 +70,7 @@ export default function LoginrRecruiter() {
                     </div>
                 </div>
             </div>
+        }
         </>
     )
 }

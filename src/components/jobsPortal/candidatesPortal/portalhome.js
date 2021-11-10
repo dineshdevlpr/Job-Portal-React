@@ -2,18 +2,19 @@ import React from 'react'
 import { Link } from "react-router-dom";
 
 
-function Home() {
+function CandidatePortalHome() {
+    
+    const userEmail = localStorage.getItem("userEmail")
 
     return (
         <>
             <div className="container">
-                <Link to="/democredentials" className="text-dark" style={{textAlign: "right"}}><h6>Show Demo Credentials(for testing purpose)</h6></Link>
                 <div className="row justify-content-center align-items-center">
                     <div className="col-md-6">
                         <div className="col-md-12">
                         <div className="form-group ml-3">
-                                    <Link to="/candidate/login" className="text-dark"><h3>► Register/Login as Candidate</h3></Link> 
-                                    <Link to="/recruiter/login" className="text-dark"><h3>► Register/Login as Recruiter</h3></Link>
+                                    <Link to="/candidate/viewjobs" className="text-muted"><h3>► View Jobs</h3></Link> 
+                                    <Link to={`/candidate/appliedjobs/${userEmail}`} className="text-muted"><h3>► Applied Jobs</h3></Link>
                                 </div>
                         </div>
                     </div>
@@ -23,4 +24,4 @@ function Home() {
     )
 }
 
-export default Home
+export default CandidatePortalHome

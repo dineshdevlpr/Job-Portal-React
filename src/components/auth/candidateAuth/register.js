@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import {Link , useHistory} from "react-router-dom";
+import loader from '../../../loader.svg'
 
 export default function RegisterCandidate() {
 
@@ -10,8 +11,11 @@ export default function RegisterCandidate() {
     const [password, setPassword] = useState("");
     const history = useHistory();
 
+    let [loading, setLoading] = useState(false)
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true)
         const fetchData = await fetch("https://jobportaltask.herokuapp.com/candidate/register", {
         method: "POST",
         mode: 'cors',
@@ -34,31 +38,34 @@ export default function RegisterCandidate() {
 
 
     return (
-        <>
+        <>{ loading
+            ?
+            <div className="text-center"><img src={loader} alt='redirecting'/><h5>Registering Candidate...</h5></div>
+            :
             <div className="container">
                 <div className="row justify-content-center align-items-center">
                     <div className="col-md-6">
                         <div className="col-md-12">
                             <form className="form" action="" method="post" onSubmit={handleSubmit}>
-                                <h3 className="text-center text-info">Register as Candidate</h3>
+                                <h3 className="text-center text-primary">Register as Candidate</h3>
                                 <div className="form-group">
-                                    <label for="firstname" className="text-info">First Name:</label><br/>
+                                    <label for="firstname" className="text-primary">First Name:</label><br/>
                                     <input type="text" id="firstname" name="firstname" required onChange={(e) => setFirstName(e.target.value)} className="form-control" />
                                 </div>
                                 <div className="form-group">
-                                    <label for="lastname" className="text-info">Last Name:</label><br/>
+                                    <label for="lastname" className="text-primary">Last Name:</label><br/>
                                     <input type="text" id="lastname" name="lastname" required onChange={(e) => setLastName(e.target.value)} className="form-control" />
                                 </div>
                                 <div className="form-group">
-                                    <label for="degree" className="text-info">Degree:</label><br/>
+                                    <label for="degree" className="text-primary">Degree:</label><br/>
                                     <input type="text" id="degree" name="degree" required onChange={(e) => setDegree(e.target.value)} className="form-control" />
                                 </div>
                                 <div className="form-group">
-                                    <label for="email" className="text-info">Email:</label><br/>
+                                    <label for="email" className="text-primary">Email:</label><br/>
                                     <input type="email" id="email" name="email" required onChange={(e) => setEmail(e.target.value)} className="form-control" />
                                 </div>
                                 <div className="form-group">
-                                    <label for="password" className="text-info">Password:</label><br/>
+                                    <label for="password" className="text-primary">Password:</label><br/>
                                     <input type="password" name="password" id="password" required onChange={(e) => setPassword(e.target.value)} className="form-control" />
                                 </div>
                                 <div className="form-group">
@@ -72,6 +79,7 @@ export default function RegisterCandidate() {
                     </div>
                 </div>
             </div>
+        }
         </>
     )
 }

@@ -1,15 +1,18 @@
 import React, { useState } from 'react'
 import { useHistory, useParams } from "react-router-dom";
+import loader from '../../../loader.svg'
 
 export default function ResetCandidate() {
 
 
     const [password, setPassword] = useState("");
+    let [loading, setLoading] = useState(false)
     const history = useHistory();
     const { randomString } = useParams();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true)
         const fetchData = await fetch(`https://jobportaltask.herokuapp.com/candidate/reset/${randomString}`, {
         method: "POST",
         mode: 'cors',
@@ -30,15 +33,18 @@ export default function ResetCandidate() {
 
 
     return (
-        <>
+        <>{ loading
+            ?
+            <div className="text-center"><img src={loader} alt='redirecting'/><h5>Updating password...</h5></div>
+            :
             <div className="container">
                 <div className="row justify-content-center align-items-center">
                     <div className="col-md-6">
                         <div lassName="col-md-12">
                             <form className="form" action="" method="post" onSubmit={handleSubmit}>
-                                <h3 className="text-center text-info">Reset Password</h3>
+                                <h3 className="text-center text-primary">Reset Password</h3>
                                 <div className="form-group">
-                                    <label for="password" className="text-info">New Password:</label><br/>
+                                    <label for="password" className="text-primary">New Password:</label><br/>
                                     <input type="password" name="password" id="password" required onChange={(e) => setPassword(e.target.value)} className="form-control" />
                                 </div>
                                 <div className="form-group">
@@ -49,6 +55,7 @@ export default function ResetCandidate() {
                     </div>
                 </div>
             </div>
+        }
         </>
     )
 }
