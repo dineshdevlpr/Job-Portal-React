@@ -1,3 +1,7 @@
+##About Project##
+
+This is Front End Repo for Job Portal site which is build using React Js Library. This MERN Stack Web app provides seperate portal for candidate and recruiter. Recruiter can Create, View, Modify, Delete the jobs and can also see the candidates applied for a particular job. Candidates can View and apply for jobs and also they can see the jobs they had already applied.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
